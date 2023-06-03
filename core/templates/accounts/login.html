@@ -1,0 +1,17 @@
+{% extends 'Base.html' %}
+{% block title %}lol{% endblock title %}
+{% block body %}
+
+<h1>login</h1>
+<h2>{{ request.user}}
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit">Login</button>
+    <button type="reset"><a href="{% url 'logout' %}">Reset</a></button>
+
+</form>
+
+
+{% endblock body %}

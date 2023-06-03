@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <h1>{{post.title}}</h1>
+    <p>{{post.content}}</p>
+    <h2>{{request.user}}</h2>
+    <!-- template.html -->
+
+<img src="{{ MEDIA_URL }}{{ image.url }}" alt="Image">
+
+  <h2>Comments</h2>
+  <ul>
+    {% for comment in comments %}
+      <li>{{ comment.user }}: {{ comment.content }}</li>
+    {% endfor %}
+  </ul>
+
+  <!-- Comment form -->
+  <h2>Add Comment</h2>
+  <form method="post" action="{% url 'comment_create' post.id %}">
+    {% csrf_token %}
+    {{ comment_form.as_p }}
+    <button type="submit">Add Comment</button>
+  </form>
+{% endblock %}

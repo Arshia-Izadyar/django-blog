@@ -1,0 +1,14 @@
+{% extends 'Base.html' %}
+{% block title %}lol{% endblock title %}
+{% block body %}
+    <hw>lol</h1>
+    <form method = "POST" action = "">
+
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="ok">
+        
+    </form>
+
+    <a href=" {% url 'create-post' %}">add</a>
+{% endblock body %}

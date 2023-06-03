@@ -1,0 +1,10 @@
+{% extends 'Base.html' %}
+{% block title %}lol{% endblock title %}
+{% block body %}
+    <hw>lol</h1>
+    {% for i in posts %}
+        <a href='/blog/detail/{{ i.pk }}/'>{{i.title}}</p>
+    {% endfor %}
+
+    <a href=" {% url 'create-post' %}">add</a>
+{% endblock body %}
