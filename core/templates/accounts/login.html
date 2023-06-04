@@ -41,7 +41,7 @@
         width: 100%;
         padding: 10px;
         margin-top: 20px;
-        background-color: #4CAF50;
+        background-color: #000000;
         color: #fff;
         border: none;
         border-radius: 3px;
@@ -61,16 +61,13 @@
     <h1>Login</h1>
     <form method="post">
         {% csrf_token %}
+
+        {{form.as_p}}
+
+        <input type="submit" value="login">
         {% if error_message %}
             <p class="error-message">{{ error_message }}</p>
         {% endif %}
-        <label for="username">Username:</label>
-        {{form.username}}
-
-        <label for="password">Password:</label>
-        {{form.password}}
-
-        <input type="submit" value="login">
     </form>
 </div>
 

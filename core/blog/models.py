@@ -34,7 +34,8 @@ class BlogPostModel(models.Model):
     likes = models.IntegerField(default=0)
     comments = models.ManyToManyField(CommentModel, related_name="blog_comments", blank=True)
     title = models.CharField(max_length=35, unique=True)
-    image = models.ImageField(upload_to='images/blog', null=True, blank=True)
+    image = models.ImageField(upload_to='images', null=True, blank=True)
+
 
     
     
@@ -44,4 +45,4 @@ class BlogPostModel(models.Model):
         
     def __str__(self):
         return str(self.title)
-        
+    

@@ -11,4 +11,4 @@ class CreateBlogPostForm(forms.ModelForm):
 class CommentForm(forms.ModelForm):
     class Meta:
         model = CommentModel
-        fields = ('content', 'spoiler')
+        fields = ('content',)
