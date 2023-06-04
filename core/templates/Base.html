@@ -1,23 +1,97 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>{% block title %}{% endblock title %}</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
-    </head>
-    <body>
-        {% block body %}{% endblock body %}
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
+<head>
+    <title>{% block title %}{% endblock title %}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
         
-        <script src="" async defer></script>
-    </body>
+        .navbar {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            display: flex; /* Added flex display */
+            justify-content: space-between; /* Items spread out horizontally */
+        }
+        
+        .navbar ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        
+        .navbar li {
+            float: left;
+        }
+        
+        .navbar li a {
+            display: block;
+            color: #fff;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .navbar li a:hover {
+            background-color: #555;
+        }
+        
+
+        .navbar .auth-items {
+            display: flex; /* Added flex display */
+        }
+        
+        .navbar .auth-items li {
+            margin-left: 10px; /* Added margin for spacing between items */
+        }
+        
+        .content {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f7f7f7;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .content h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .content p {
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <ul>
+            <li><a href="#">About</a></li>
+            <li><a href="{% url 'posts-list' %}">Home</a></li>
+            <li><a href="{% url 'create-post' %}">Create</a></li>
+        </ul>
+
+        <ul class="auth-items">
+            
+            {% if request.user.is_authenticated %}
+                
+                <li><a href="{% url 'logout' %}">Log out</a></li>
+            {%else%}
+                <li><a href="{% url 'login' %}">Login</a></li>
+                <li><a href="{% url 'signup' %}">Sign Up</a></li>
+            {% endif %}
+        </ul>
+    </div>
+
+    <div class="content">
+        {% block body %}
+
+        {% endblock %}
+    </div>
+</body>
 </html>

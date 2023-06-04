@@ -1,10 +1,90 @@
 {% extends 'Base.html' %}
-{% block title %}lol{% endblock title %}
+{% block title %}Post List{% endblock title %}
 {% block body %}
-    <hw>lol</h1>
-    {% for i in posts %}
-        <a href='/blog/detail/{{ i.pk }}/'>{{i.title}}</p>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .post {
+            margin-bottom: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+        }
+
+        .post h2 {
+            margin-top: 0;
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .post p {
+            margin-bottom: 0;
+            color: #666;
+            font-size: 16px;
+        }
+
+        .no-posts {
+            text-align: center;
+            color: #999;
+            font-size: 18px;
+            margin-top: 50px;
+        }
+        #add-buttom {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+          }
+        
+          .button-link:hover {
+            background-color: #45a049;
+          }
+    </style>
+</head>
+<body>
+    <h1>Post List</h1>
+    {% if posts %}
+        {% for i in posts %}
+        <div class="post">
+            
+            <h2><a href='/blog/detail/{{ i.pk }}/'>{{i.title}}</a></h2>
+            <p>lol</p>
+            <p>{{ i.created_date }}</p>
+        </div>
+        {% endfor %}
+        
+        <a href=" {% url 'create-post' %}">
+            <button id="add-buttom">Add your movie</button>
+          </a>
+
+
+    {% else %}
+    <p class="no-posts">No posts available.</p>
+    {% endif %}
+</body>
+    {% comment %} {% for i in posts %}
+        
     {% endfor %}
 
-    <a href=" {% url 'create-post' %}">add</a>
+
+</body> {% endcomment %}
 {% endblock body %}
