@@ -1,0 +1,12 @@
+{% extends 'Base.html' %}
+{% block title %}Profile{% endblock title %}
+{% block body %}
+    <h1>{{ user }}</h1>
+    <h2>total posts: {{ totalposts }}</h2>
+    {% for post in posts%}
+        <h2>{{ post.title }}({% if post.state == 1%}Draft)  {%else%}POSTED){% endif %}</h2>
+    {% endfor %}
+
+
+
+{% endblock body %}

@@ -15,7 +15,8 @@ class CommentModel(models.Model):
     created_time = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="Comments")
     spoiler = models.BooleanField(default=False)
-
+    
+    
 
 
 class BlogPostModel(models.Model):

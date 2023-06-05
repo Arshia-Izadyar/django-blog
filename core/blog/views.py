@@ -1,5 +1,6 @@
 from typing import Any
 from django import http
+from django.db import models
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
@@ -8,6 +9,8 @@ from django.views.generic import ListView, FormView, DetailView, View
 from django.urls import reverse_lazy
 from .models import BlogPostModel, CommentModel
 from .forms import CreateBlogPostForm, CommentForm
+from django.shortcuts import get_object_or_404
+
 
 # CrEaTe YoUr ViEeS HeRe .
 
@@ -46,12 +49,12 @@ class BlogPostDetail(DetailView):
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['comment_form'] = CommentForm()
         context['comments'] = CommentModel.objects.filter(blog=self.object)
         return context
-
 
 class CommentCreateView(View):
     

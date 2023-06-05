@@ -1,10 +1,14 @@
-from typing import Any
-from django.http import HttpRequest, HttpResponse
+from typing import Any, Dict
+from django.contrib.auth.decorators import login_required
+from django.db.models.query import QuerySet
+from django.http import HttpResponse
+from django.utils.decorators import method_decorator
 from django.shortcuts import redirect
-from django.views.generic import FormView
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, ProfileCreationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import authenticate, login, logout
-from django.views.generic import View
+from django.views.generic import ListView, FormView, DetailView, View
+from blog.models import BlogPostModel
+
 
 class LoginView(FormView):
     form_class = AuthenticationForm
@@ -53,9 +57,33 @@ class SignUpView(FormView):
         return redirect('login')
     
 
-class ProfileView(View):
+class ProfileView(ListView):
     template_name = 'accounts/profile.html'
+    # queryset = BlogPostModel.objects.all()
+    # model = BlogPostModel
     
-    def get(self, request, *args, **kwargs): 
-        pass
+    
+    @method_decorator(login_required) 
+    def dispatch(self, request, *args, **kwargs):
+        self.user = self.request.user
+        return super().dispatch(request, *args, **kwargs)
+    
+    
+    def get_queryset(self):
+        self.query = BlogPostModel.objects.filter(author=self.user)
+        return self.query
+    
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['posts'] = self.query
+        context['user'] = self.user
+        context['totalposts'] = self.query.count()
+        return context
+
+    
+        
+
+    
+    
     

@@ -3,10 +3,12 @@
 {% block body %}
     <h1>{{post.title}}</h1>
     <p>{{post.content}}</p>
-    <h2>{{request.user}}</h2>
-    
 
-<img src="{{ MEDIA_URL }}{{ image.url }}" alt="Image">
+    <h2>athor : {{post.author}}</h2>
+
+    
+<p> {{ i.image }}</p>
+
 
   <h2>Comments</h2>
   <ul>
