@@ -26,7 +26,7 @@ Api:
 
 Api List
 
-Api Get, Update, Delete, Create are accessible through sendig POST, PUT and GET to /post-detail/
+Api Get, Update, Delete, Create are accessible through sendig POST, PUT and GET to api/post-detail/
 
 mini project : Simple django blog
 
