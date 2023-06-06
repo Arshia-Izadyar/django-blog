@@ -15,6 +15,11 @@ you caan Read the whole post list from another users
 
 you can Delete your posts
 
+posts are either posted or draft
+
+you can see draft posts in your profile
+
+
 Api:
 
 Api List
