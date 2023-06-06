@@ -1,0 +1,21 @@
+{% extends 'Base.html' %}
+{% block title %}Profile{% endblock title %}
+{% block body %}
+{% load blog_extras %}
+    <h1>{{ user }}</h1>
+    <h2>total posts: {{ totalposts }}</h2>
+    <h3> <b>edit posts :</b> </h3>
+    
+        {% for post in posts%}
+            <h2><a href=" {% url 'edit-post' post.id %}" >{{ post.title }}({% if post.state == 1%}Draft)  {%else%}POSTED){% endif %}</a></h2>
+            <div>
+                <p>snippet : {{post.content|snippet}}</p>
+                <p>created : {{ post.created_date }}</p>
+                <p>modified : {{ post.modify_date }}</p>
+            </div>
+        {% endfor %}
+
+
+
+
+{% endblock body %}

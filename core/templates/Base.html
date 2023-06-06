@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}{% endblock title %}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .navbar {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            display: flex; 
+            justify-content: space-between;
+        }
+        
+        .navbar ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        
+        .navbar li {
+            float: left;
+        }
+        
+        .navbar li a {
+            display: block;
+            color: #fff;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .navbar li a:hover {
+            background-color: #555;
+        }
+        
+
+        .navbar .auth-items {
+            display: flex; /* Added flex display */
+        }
+        
+        .navbar .auth-items li {
+            margin-left: 10px; /* Added margin for spacing between items */
+        }
+        
+        .content {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f7f7f7;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .content h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .content p {
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <ul>
+            <li><a href="{% url 'about-page' %}">About</a></li>
+            <li><a href="{% url 'posts-list' %}">Home</a></li>
+            <li><a href="{% url 'create-post' %}">Create</a></li>
+        </ul>
+
+        <ul class="auth-items">
+            
+            {% if request.user.is_authenticated %}
+                
+                <li><a href="{% url 'accounts:logout' %}">Log out</a></li>
+                <li><a href="{% url 'accounts:profile' %}">profile</a></li>
+                
+            {%else%}
+                <li><a href="{% url 'accounts:login' %}">Login</a></li>
+                <li><a href="{% url 'accounts:signup' %}">Sign Up</a></li>
+            {% endif %}
+        </ul>
+    </div>
+
+    <div class="content">
+        {% block body %}
+
+        {% endblock %}
+    </div>
+</body>
+</html>
