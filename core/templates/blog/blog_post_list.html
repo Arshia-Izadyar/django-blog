@@ -1,6 +1,7 @@
 {% extends 'Base.html' %}
 {% block title %}Post List{% endblock title %}
 {% block body %}
+{% load blog_extras %}
 <head>
     <style>
         body {
@@ -66,9 +67,11 @@
         {% for i in posts %}
         <div class="post">
             
-            <h2><a href='/blog/detail/{{ i.pk }}/'>{{i.title}}</a></h2>
-            <p>lol</p>
-            <p>{{ i.created_date }}</p>
+            <h2><a href='/blog/detail/{{ i.pk }}/'>{{i.title|title}}</a></h2>
+            <p>snippet : {{i.content|snippet}}</p>
+            <p>created : {{ i.created_date }}</p>
+            <p>modified : {{ i.modify_date }}</p>
+
         </div>
         {% endfor %}
         

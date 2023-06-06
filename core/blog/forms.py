@@ -2,7 +2,7 @@ from django import forms
 from .models import CommentModel, BlogPostModel
 
 
-class CreateBlogPostForm(forms.ModelForm):
+class BlogPostForm(forms.ModelForm):
     class Meta:
         model = BlogPostModel
         fields = ('title', 'content', 'state', 'image')

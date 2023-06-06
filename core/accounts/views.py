@@ -44,7 +44,7 @@ class LogoutView(View):
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated:
             logout(request)
-        return redirect('login')
+        return redirect('accounts:login')
     
     
 class SignUpView(FormView):
@@ -54,7 +54,7 @@ class SignUpView(FormView):
         form = self.form_class(request.POST)
         form.is_valid()
         form.save()
-        return redirect('login')
+        return redirect('accounts:login')
     
 
 class ProfileView(ListView):

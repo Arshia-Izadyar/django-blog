@@ -5,11 +5,12 @@ from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from django.views.generic import ListView, FormView, DetailView, View
+from django.views.generic import ListView, FormView, DetailView, View, UpdateView
 from django.urls import reverse_lazy
 from .models import BlogPostModel, CommentModel
-from .forms import CreateBlogPostForm, CommentForm
-from django.shortcuts import get_object_or_404
+from .forms import BlogPostForm, CommentForm
+from django.core.exceptions import ValidationError
+from datetime import datetime
 
 
 # CrEaTe YoUr ViEeS HeRe .
@@ -23,7 +24,7 @@ class BlogPostList(ListView):
     
 class BlogPostCreate(FormView):
     
-    form_class = CreateBlogPostForm
+    form_class = BlogPostForm
     success_url = reverse_lazy('posts-list')
     template_name = 'blog/blog_post_create.html'
 
@@ -70,3 +71,28 @@ class CommentCreateView(View):
             comment.blog = BlogPostModel.objects.get(pk=self.kwargs['pk'])
             comment.save()
         return redirect('posts-list')
+
+class EditPostView(UpdateView):
+    model = BlogPostModel
+    fields = ('title', 'content', 'state', 'image')
+    success_url = reverse_lazy("posts-list")
+    template_name = 'blog/update_post.html'
+    context_object_name = 'post'
+    
+    def dispatch(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
+        self.object = self.get_object()
+        return super().dispatch(request, *args, **kwargs)
+
+    
+    def get(self, request, *args, **kwargs):
+        if request.user == self.object.author:
+            return super().get(request, *args, **kwargs)
+        else:raise ValidationError("user is not owner of blog post")
+        
+    def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
+        self.form = BlogPostForm(request.POST, self.model)
+        self.modify_date = datetime.now()
+        # self.form.is_valid()
+        # self.form.save()
+        
+        return super().post(request, *args, **kwargs)

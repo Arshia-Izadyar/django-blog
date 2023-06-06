@@ -13,8 +13,8 @@
             background-color: #333;
             color: #fff;
             padding: 10px;
-            display: flex; /* Added flex display */
-            justify-content: space-between; /* Items spread out horizontally */
+            display: flex; 
+            justify-content: space-between;
         }
         
         .navbar ul {
@@ -71,7 +71,7 @@
 <body>
     <div class="navbar">
         <ul>
-            <li><a href="#">About</a></li>
+            <li><a href="{% url 'about-page' %}">About</a></li>
             <li><a href="{% url 'posts-list' %}">Home</a></li>
             <li><a href="{% url 'create-post' %}">Create</a></li>
         </ul>
@@ -80,10 +80,12 @@
             
             {% if request.user.is_authenticated %}
                 
-                <li><a href="{% url 'logout' %}">Log out</a></li>
+                <li><a href="{% url 'accounts:logout' %}">Log out</a></li>
+                <li><a href="{% url 'accounts:profile' %}">profile</a></li>
+                
             {%else%}
-                <li><a href="{% url 'login' %}">Login</a></li>
-                <li><a href="{% url 'signup' %}">Sign Up</a></li>
+                <li><a href="{% url 'accounts:login' %}">Login</a></li>
+                <li><a href="{% url 'accounts:signup' %}">Sign Up</a></li>
             {% endif %}
         </ul>
     </div>

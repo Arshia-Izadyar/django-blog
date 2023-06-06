@@ -1,0 +1,19 @@
+{% extends 'Base.html' %}
+{%block title%} Update Post{%endblock%}
+{% block body %}
+
+
+
+
+    <h1>{{post.title}}</h1>
+    <h2>author : {{post.author}}</h2>
+    <h3> Edit </h3>
+    <form method="post" action=''>
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="Edit" />
+    </form> 
+
+
+
+{% endblock body %}
