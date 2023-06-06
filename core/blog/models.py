@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.query import QuerySet
+from django.urls import reverse
 # CrEaTe YoUr MoDeLd HeRe ................
 
 
@@ -46,3 +47,9 @@ class BlogPostModel(models.Model):
         
     def __str__(self):
         return str(self.title)
+    
+    def get_abs_api_url(self):
+        return reverse("api:post-detail", args=[self.pk])
+
+    def snippet(self):
+        return self.content[:30]
