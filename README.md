@@ -21,6 +21,14 @@ posts are either posted or draft
 
 you can see draft posts in your profile
 
+post list:
+
+/post-list/
+
+post detail:
+
+/post-detail/
+
 
 Api:
 
