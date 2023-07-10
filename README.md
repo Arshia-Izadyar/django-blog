@@ -1,19 +1,16 @@
 # django-blog
-simple django project to do before i sleep 
 
+this is a simple blog website backend with Dj
 
-doing this because i failed at another project (i planned the whole project wrong)
+## How it works
 
-
-lets get my confidence to the normal level again 
-
-you can CREATE blog Posts
+Full CRUD on blog posts
 
 People can COMMENT on your post
 
 you can Edit your post from your profile
 
-you caan Read the whole post list from another users
+you can Read the whole post list from another users
 
 you can Delete your posts
 
@@ -21,20 +18,12 @@ posts are either posted or draft
 
 you can see draft posts in your profile
 
-post list:
 
-/post-list/
+## API
 
-post detail:
+Api for this project is done separately due to lack of my django skills at that time
 
-/post-detail/
-
-
-Api:
-
-Api List
-
-Api Get, Update, Delete, Create are accessible through sendig POST, PUT and GET to api/post-detail/
+<a href="https://github.com/Arshia-Izadyar/Blog-API">Blog_API Repo</a>
 
 mini project : Simple django blog
 
